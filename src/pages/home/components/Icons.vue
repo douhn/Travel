@@ -1,6 +1,6 @@
 <template>
   <div class="icons">
-    <swiper >
+    <swiper :options="swiperOption">
       <swiper-slide v-for="(page, index) of pages" :key="index">
         <div class="icon" v-for="item of page" :key="item.id">
           <div class="icon-img">
@@ -9,7 +9,7 @@
           <p class="icon-desc">{{item.desc}}</p>
         </div>
       </swiper-slide>
-      <div class="swiper-pagination" scope="pagination"></div>
+      <div class="swiper-pagination" slot="pagination"></div>
     </swiper>
   </div>
 </template>
@@ -19,7 +19,9 @@ export default {
   name: 'HomeIcons',
   data () {
     return {
-      swiperOption: {},
+      swiperOption: {
+        autoplay: false
+      },
       iconList: [{
         id: '0001',
         imgUrl: 'http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png',
@@ -68,7 +70,7 @@ export default {
       const pages = []
       this.iconList.forEach((item, index) => {
         const page = Math.floor(index / 8)
-        if(!pages[page]) {
+        if (!pages[page]) {
           pages[page] = []
         }
         pages[page].push(item)
@@ -85,32 +87,34 @@ export default {
     overflow: hidden
     height: 0
     padding-bottom: 50%
-  .icon
-    position: relative
-    overflow: hidden
-    float: left
-    width: 25%
-    padding-bottom: 25%
-    .icon-img
-      position: absolute
-      top: 0
-      left: 0
-      right: 0
-      bottom: .44rem //12px
-      box-sizing: border-box
-      padding: .1rem //5px
-      .icon-img-content
-        height: 100%
-        margin: 0 auto
-        display: block
-    .icon-desc
-      position: absolute
-      left: 0
-      right: 0
-      bottom: 0
-      height: .44rem
-      line-height: .44rem
-      text-align: center
-      color: $darkTextColor
-      ellipsis()
+  .icons
+    margin-top: .1rem
+    .icon
+      position: relative
+      overflow: hidden
+      float: left
+      width: 25%
+      padding-bottom: 25%
+      .icon-img
+        position: absolute
+        top: 0
+        left: 0
+        right: 0
+        bottom: .44rem //12px
+        box-sizing: border-box
+        padding: .1rem //5px
+        .icon-img-content
+          height: 100%
+          margin: 0 auto
+          display: block
+      .icon-desc
+        position: absolute
+        left: 0
+        right: 0
+        bottom: 0
+        height: .44rem
+        line-height: .44rem
+        text-align: center
+        color: $darkTextColor
+        ellipsis()
 </style>
