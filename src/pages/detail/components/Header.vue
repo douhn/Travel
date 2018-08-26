@@ -38,7 +38,6 @@ export default {
       if (top > 60) {
         let opacity = top / 140
         opacity = opacity > 1 ? 1 : opacity
-        console.log('opacityStyle', opacity)
         this.opacityStyle = {
           opacity
         }
@@ -49,8 +48,11 @@ export default {
     }
   },
   activated () {
-    console.log('出发一次啊')
     window.addEventListener('scroll', this.handleScroll)
+  },
+  deactivated () {
+    // 页面将被隐藏时触发，防止函数多次注册及多个组件都生效
+    window.removeEventListener('scroll', this.handleScroll)
   }
 }
 </script>
