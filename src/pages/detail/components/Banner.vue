@@ -1,13 +1,15 @@
 <template>
   <div>
     <div class="banner" @click="handleBannerCLick">
-      <img class="banner-img" src="http://img1.qunarzz.com/sight/p0/1411/1a/5582f9f24bc50b475a8cbda4c5ac8d24.water.jpg_600x330_e8437d6f.jpg" alt="">
+      <img class="banner-img" :src="bannerImg" alt="">
       <div class="banner-info">
-        <div class="banner-tittle">秦始皇陵博物院(AAAAA景区)</div>
-        <div class="banner-number"><span class="iconfont banner-icon">&#xe692;</span>39</div>
+        <div class="banner-tittle">{{sightName}}</div>
+        <div class="banner-number"><span class="iconfont banner-icon">&#xe692;</span>{{bannerImgs.length}}</div>
       </div>
     </div>
-    <common-gallary :imgs="imgs" v-show="showGallary"
+    <common-gallary
+      :imgs="bannerImgs"
+      v-show="showGallary"
       @close="handleGallaryColose"
     ></common-gallary>
   </div>
@@ -16,11 +18,15 @@
 <script>
 import CommonGallary from 'common/gallary/Gallary'
 export default {
-  name: 'Banner',
+  name: 'DetailBanner',
+  props: {
+    sightName: String,
+    bannerImg: String,
+    bannerImgs: Array
+  },
   data () {
     return {
-      showGallary: false,
-      imgs: ['http://img1.qunarzz.com/sight/p0/1505/10/100d2e82848fb2.water.jpg_r_800x800_5b03aa73.jpg', 'http://img1.qunarzz.com/sight/p0/1411/6f/9e2a73e12689fc87f27e7f4a252b74b0.water.jpg_r_800x800_9daf6ce2.jpg', '  http://img1.qunarzz.com/sight/p0/1507/1b/4eca8b1c528e259fc69a2119cda278f0.water.jpg_r_800x800_15a9c15b.jpg']
+      showGallary: false
     }
   },
   methods: {
